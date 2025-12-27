@@ -1,105 +1,123 @@
-/* Fonts */
+/* Fonts & Body */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f3e9dc;
-    margin: 0;
-    padding: 0;
-    color: #4a3c31;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f3e9dc;
+  margin: 0;
+  padding: 0;
+  color: #4a3c31;
 }
 
+/* Header */
 header {
-    background-color: #a67b5b;
-    padding: 20px;
-    text-align: center;
-    color: white;
+  background-color: #a67b5b;
+  padding: 20px;
+  text-align: center;
+  color: white;
 }
 
 h1 {
-    font-family: 'Playfair Display', serif;
-    margin: 0;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
 }
 
 #money-display {
-    margin-top: 10px;
-    font-size: 18px;
+  margin-top: 10px;
+  font-size: 18px;
 }
 
+/* Layout */
 main {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 #map-section, #museum-section {
-    width: 45%;
+  width: 45%;
 }
 
+/* Map */
 #map {
-    position: relative;
-    background-image: url('https://i.imgur.com/8xJdThZ.png'); /* placeholder map */
-    background-size: cover;
-    height: 500px;
-    border: 3px solid #a67b5b;
-    border-radius: 10px;
+  position: relative;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/79/Romania_relief_map.png');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  border: 3px solid #a67b5b;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .artifact {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-size: cover;
+  transition: transform 0.2s;
 }
 
+.artifact:hover {
+  transform: scale(1.2);
+}
+
+/* Museum */
 #museum {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .artifact-card {
-    background-color: #fff1e6;
-    border: 2px solid #a67b5b;
-    border-radius: 8px;
-    padding: 5px;
-    width: 100px;
-    text-align: center;
+  background-color: #fff1e6;
+  border: 2px solid #a67b5b;
+  border-radius: 8px;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
+/* Sliders */
 #sliders {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 #sliders label {
-    display: block;
-    margin: 5px 0;
+  display: block;
+  margin: 5px 0;
 }
 
+/* Buttons */
 button {
-    background-color: #d9a066;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+  background-color: #d9a066;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
 }
 
 button:hover {
-    background-color: #c58a49;
+  background-color: #c58a49;
 }
 
+/* Popup */
 #popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff1e6;
-    border: 3px solid #a67b5b;
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff1e6;
+  border: 3px solid #a67b5b;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  width: 250px;
+  text-align: center;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
