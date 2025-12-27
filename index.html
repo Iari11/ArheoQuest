@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muzeul Arheologic</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muzeul Arheologic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Muzeul Arheologic</h1>
-        <div id="money-display">Coins: 0</div>
-    </header>
+  <header>
+    <h1>Muzeul Arheologic</h1>
+    <div id="money-display">Coins: 0</div>
+  </header>
 
-    <main>
-        <section id="map-section">
-            <h2>Map of Romania</h2>
-            <div id="map">
-                <!-- Artifacts will appear here -->
-            </div>
-        </section>
+  <main>
+    <section id="map-section">
+      <h2>Harta României</h2>
+      <div id="map">
+        <!-- Artifacts will appear here -->
+      </div>
+    </section>
 
-        <section id="museum-section">
-            <h2>Your Museum</h2>
-            <div id="museum">
-                <!-- Collected artifacts appear here -->
-            </div>
-            <div id="sliders">
-                <label>Light: <input type="range" id="light" min="0" max="100" value="50"></label>
-                <label>Temperature: <input type="range" id="temp" min="0" max="100" value="50"></label>
-                <label>Humidity: <input type="range" id="humidity" min="0" max="100" value="50"></label>
-            </div>
-        </section>
-    </main>
+    <section id="museum-section">
+      <h2>Muzeul tău</h2>
+      <div id="museum">
+        <!-- Collected artifacts -->
+      </div>
+      <div id="sliders">
+        <label>Light: <input type="range" id="light" min="0" max="100" value="50"></label>
+        <label>Temperature: <input type="range" id="temp" min="0" max="100" value="50"></label>
+        <label>Humidity: <input type="range" id="humidity" min="0" max="100" value="50"></label>
+      </div>
+    </section>
+  </main>
 
-    <div id="popup" class="hidden">
-        <p id="popup-text"></p>
-        <button id="close-popup">Close</button>
-    </div>
+  <div id="popup" class="hidden">
+    <p id="popup-text"></p>
+    <button id="close-popup">Close</button>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
