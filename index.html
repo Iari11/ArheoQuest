@@ -1,69 +1,44 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comorile Daciei 🪨</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muzeul Arheologic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🪨 Comorile Daciei</h1>
-    <p>Descoperă artefacte unice și creează-ți propriul muzeu virtual!</p>
-    <div id="money">💰 Bani: 0</div>
-  </header>
+    <header>
+        <h1>Muzeul Arheologic</h1>
+        <div id="money-display">Coins: 0</div>
+    </header>
 
-  <main>
-    <!-- Home Buttons -->
-    <div class="home-buttons">
-      <a href="#map-section"><button>Explorează Harta</button></a>
-      <a href="#museum-section"><button>Vizitează Muzeul Meu</button></a>
-      <a href="#about-section"><button>Despre Joc</button></a>
+    <main>
+        <section id="map-section">
+            <h2>Map of Romania</h2>
+            <div id="map">
+                <!-- Artifacts will appear here -->
+            </div>
+        </section>
+
+        <section id="museum-section">
+            <h2>Your Museum</h2>
+            <div id="museum">
+                <!-- Collected artifacts appear here -->
+            </div>
+            <div id="sliders">
+                <label>Light: <input type="range" id="light" min="0" max="100" value="50"></label>
+                <label>Temperature: <input type="range" id="temp" min="0" max="100" value="50"></label>
+                <label>Humidity: <input type="range" id="humidity" min="0" max="100" value="50"></label>
+            </div>
+        </section>
+    </main>
+
+    <div id="popup" class="hidden">
+        <p id="popup-text"></p>
+        <button id="close-popup">Close</button>
     </div>
 
-    <!-- Map Section -->
-    <section id="map-section">
-      <h2>Harta României</h2>
-      <div id="map-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Romania_location_map.svg" alt="Harta României" id="romania-map">
-      </div>
-    </section>
-
-    <!-- Museum Section -->
-    <section id="museum-section">
-      <h2>Muzeul Meu</h2>
-      <div id="museum-gallery"></div>
-
-      <!-- Decorations -->
-      <div id="decorations">
-        <h3>Decorează Muzeul</h3>
-        <button onclick="setDecoration('background', '#fdf6f0')">Luminos</button>
-        <button onclick="setDecoration('background', '#e5d3b3')">Pământiu</button>
-        <button onclick="setDecoration('frame', '#a0522d')">Rame Maro</button>
-        <button onclick="setDecoration('frame', '#c19a6b')">Rame Aurii</button>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about-section">
-      <h2>Despre Joc</h2>
-      <p>Fiecare artefact are o poveste, o perioadă și un nivel de raritate. Ai grijă de colecția ta cu lumina, temperatura și umiditatea corecte și câștigă bani pentru a-ți personaliza muzeul!</p>
-    </section>
-  </main>
-
-  <!-- Artifact Popup -->
-  <div id="popup" class="hidden">
-    <div id="popup-content">
-      <span id="close-popup">&times;</span>
-      <h3 id="artifact-name"></h3>
-      <p id="artifact-story"></p>
-      <p><strong>Perioadă:</strong> <span id="artifact-period"></span></p>
-      <p><strong>Raritate:</strong> <span id="artifact-rarity"></span></p>
-      <button id="collect-btn">Colectează Artefactul</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
