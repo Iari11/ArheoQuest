@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comorile Daciei 🪨</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>🪨 Comorile Daciei</h1>
+    <p>Descoperă artefacte unice din România și creează-ți propriul muzeu virtual!</p>
+    <div id="money">💰 Bani: 0</div>
+  </header>
+
+  <main>
+    <!-- Home Buttons -->
+    <div class="home-buttons">
+      <a href="#map-section"><button>Explorează Harta</button></a>
+      <a href="#museum-section"><button>Vizitează Muzeul Meu</button></a>
+      <a href="#about-section"><button>Despre Joc</button></a>
+    </div>
+
+    <!-- Map Section -->
+    <section id="map-section">
+      <h2>Harta României</h2>
+      <div id="map-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Romania_location_map.svg" alt="Harta României" id="romania-map">
+      </div>
+    </section>
+
+    <!-- Museum Section -->
+    <section id="museum-section">
+      <h2>Muzeul Meu</h2>
+      <div id="museum-gallery"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-section">
+      <h2>Despre Joc</h2>
+      <p>Acesta este un joc interactiv în care poți descoperi artefacte arheologice ascunse în România. Fiecare artefact are o poveste, o perioadă istorică și un nivel de raritate. Ai grijă de colecția ta și personalizează-ți muzeul!</p>
+    </section>
+  </main>
+
+  <!-- Artifact Popup -->
+  <div id="popup" class="hidden">
+    <div id="popup-content">
+      <span id="close-popup">&times;</span>
+      <h3 id="artifact-name"></h3>
+      <p id="artifact-story"></p>
+      <p><strong>Perioadă:</strong> <span id="artifact-period"></span></p>
+      <p><strong>Raritate:</strong> <span id="artifact-rarity"></span></p>
+      <button id="collect-btn">Colectează Artefactul</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
