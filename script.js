@@ -1,127 +1,80 @@
-const artifacts = [
-  { name: "Casca Dacică", story: "O cască purtată de războinicii daci.", period: "1st century BC", rarity: "Rar", x: 200, y: 150 },
-  { name: "Monedă Romană", story: "Monedă bătută în Dacia romană.", period: "2nd century AD", rarity: "Comun", x: 450, y: 250 },
-  { name: "Vază Antică", story: "O vază decorată frumos.", period: "1st century AD", rarity: "Necomun", x: 600, y: 120 },
-  { name: "Brățară Tracică", story: "O brățară purtată de nobilii tracici.", period: "3rd century BC", rarity: "Rar", x: 350, y: 80 },
-  { name: "Amforă Romană", story: "Amforă folosită pentru transportul vinului.", period: "1st century AD", rarity: "Necomun", x: 520, y: 200 },
-  { name: "Statuetă Dacică", story: "O mică statuetă reprezentând un zeu dac.", period: "2nd century BC", rarity: "Foarte Rar", x: 700, y: 180 }
-];
+// User data
+let money = 0;
+const artifacts = [];
+const collected = [];
 
-let collectedArtifacts = JSON.parse(localStorage.getItem('collectedArtifacts')) || [];
-let money = parseInt(localStorage.getItem('money')) || 0;
-let decorations = JSON.parse(localStorage.getItem('decorations')) || { background: '#fdf6f0', frame: '#a0522d' };
-
-const mapContainer = document.getElementById('map-container');
-const popup = document.getElementById('popup');
-const closePopup = document.getElementById('close-popup');
-const artifactName = document.getElementById('artifact-name');
-const artifactStory = document.getElementById('artifact-story');
-const artifactPeriod = document.getElementById('artifact-period');
-const artifactRarity = document.getElementById('artifact-rarity');
-const collectBtn = document.getElementById('collect-btn');
-const museumGallery = document.getElementById('museum-gallery');
-const moneyDisplay = document.getElementById('money');
-
-// Display artifacts on map
-function displayArtifacts() {
-  artifacts.forEach((art, index) => {
-    if (!collectedArtifacts.find(a => a.name === art.name)) {
-      const div = document.createElement('div');
-      div.classList.add('artifact');
-      div.style.left = art.x + 'px';
-      div.style.top = art.y + 'px';
-      div.textContent = "🪨";
-      div.title = art.name;
-      div.addEventListener('click', () => openPopup(index));
-      mapContainer.appendChild(div);
-      art.element = div;
-    }
-  });
+// Generate 20 artifacts on the map
+for (let i = 1; i <= 20; i++) {
+    const artifact = {
+        id: i,
+        name: `Artifact ${i}`,
+        time: `Period ${Math.floor(Math.random() * 5 + 1)}`,
+        rarity: ['Common', 'Uncommon', 'Rare', 'Legendary'][Math.floor(Math.random() * 4)],
+        story: `This is a short story for artifact ${i}.`,
+        x: Math.random() * 400 + 20, // random position
+        y: Math.random() * 400 + 20
+    };
+    artifacts.push(artifact);
 }
 
-// Open popup
-function openPopup(index) {
-  currentArtifact = artifacts[index];
-  artifactName.textContent = currentArtifact.name;
-  artifactStory.textContent = currentArtifact.story;
-  artifactPeriod.textContent = currentArtifact.period;
-  artifactRarity.textContent = currentArtifact.rarity;
-  popup.classList.remove('hidden');
-}
-
-// Close popup
-closePopup.addEventListener('click', () => popup.classList.add('hidden'));
-
-// Collect artifact
-collectBtn.addEventListener('click', () => {
-  if (currentArtifact && !collectedArtifacts.find(a => a.name === currentArtifact.name)) {
-    // Add sliders for care
-    currentArtifact.light = 50;
-    currentArtifact.temp = 50;
-    currentArtifact.humidity = 50;
-    collectedArtifacts.push(currentArtifact);
-    localStorage.setItem('collectedArtifacts', JSON.stringify(collectedArtifacts));
-    popup.classList.add('hidden');
-    updateMuseum();
-  }
+// Display artifacts on the map
+const map = document.getElementById('map');
+artifacts.forEach(a => {
+    const el = document.createElement('div');
+    el.className = 'artifact';
+    el.style.left = `${a.x}px`;
+    el.style.top = `${a.y}px`;
+    el.style.backgroundImage = 'url(https://i.imgur.com/Fz9dH4g.png)'; // placeholder artifact image
+    el.style.backgroundSize = 'cover';
+    el.title = `${a.name} (${a.rarity})`;
+    el.addEventListener('click', () => collectArtifact(a, el));
+    map.appendChild(el);
 });
 
-// Update museum display
-function updateMuseum() {
-  museumGallery.innerHTML = '';
-  museumGallery.style.backgroundColor = decorations.background;
-  collectedArtifacts.forEach((art, idx) => {
-    const div = document.createElement('div');
-    div.classList.add('museum-artifact');
-    div.style.border = `3px solid ${decorations.frame}`;
-    div.innerHTML = `
-      <h4>${art.name}</h4>
-      <p>${art.period}</p>
-      <p>${art.rarity}</p>
-      <div class="sliders">
-        <label>💡 Lumina</label><input type="range" min="0" max="100" value="${art.light}" data-type="light" data-index="${idx}">
-        <label>🌡️ Temperatura</label><input type="range" min="0" max="100" value="${art.temp}" data-type="temp" data-index="${idx}">
-        <label>💧 Umiditate</label><input type="range" min="0" max="100" value="${art.humidity}" data-type="humidity" data-index="${idx}">
-      </div>
-    `;
-    museumGallery.appendChild(div);
-  });
-
-  // Add event listeners for sliders
-  document.querySelectorAll('.museum-artifact input[type="range"]').forEach(slider => {
-    slider.addEventListener('input', e => {
-      const idx = e.target.dataset.index;
-      const type = e.target.dataset.type;
-      collectedArtifacts[idx][type] = parseInt(e.target.value);
-    });
-  });
-}
-
-// Decoration function
-function setDecoration(type, color) {
-  decorations[type] = color;
-  localStorage.setItem('decorations', JSON.stringify(decorations));
-  updateMuseum();
-}
-
-// Earn money from artifacts every 5 seconds
-setInterval(() => {
-  collectedArtifacts.forEach(art => {
-    if (art.light >= 40 && art.light <= 60 &&
-        art.temp >= 45 && art.temp <= 55 &&
-        art.humidity >= 45 && art.humidity <= 55) {
-      let earnings = 5;
-      if (art.rarity === "Necomun") earnings = 8;
-      if (art.rarity === "Rar") earnings = 12;
-      if (art.rarity === "Foarte Rar") earnings = 20;
-      money += earnings;
+function collectArtifact(a, el) {
+    if (!collected.includes(a.id)) {
+        collected.push(a.id);
+        el.remove();
+        money += 10; // gain coins for collecting
+        updateMoney();
+        showPopup(`${a.name} collected! ${a.story}`);
+        addToMuseum(a);
     }
-  });
-  localStorage.setItem('money', money);
-  moneyDisplay.textContent = `💰 Bani: ${money}`;
+}
+
+function addToMuseum(a) {
+    const museum = document.getElementById('museum');
+    const card = document.createElement('div');
+    card.className = 'artifact-card';
+    card.innerHTML = `<strong>${a.name}</strong><br>${a.time}<br>${a.rarity}`;
+    museum.appendChild(card);
+}
+
+function updateMoney() {
+    document.getElementById('money-display').textContent = `Coins: ${money}`;
+}
+
+// Popup
+function showPopup(text) {
+    const popup = document.getElementById('popup');
+    document.getElementById('popup-text').textContent = text;
+    popup.classList.remove('hidden');
+}
+document.getElementById('close-popup').addEventListener('click', () => {
+    document.getElementById('popup').classList.add('hidden');
+});
+
+// Sliders affect money every 5 seconds
+setInterval(() => {
+    const light = document.getElementById('light').value;
+    const temp = document.getElementById('temp').value;
+    const humidity = document.getElementById('humidity').value;
+
+    let bonus = 0;
+    if (light > 40 && light < 60) bonus += 1;
+    if (temp > 40 && temp < 60) bonus += 1;
+    if (humidity > 40 && humidity < 60) bonus += 1;
+
+    money += bonus;
+    updateMoney();
 }, 5000);
-
-displayArtifacts();
-updateMuseum();
-moneyDisplay.textContent = `💰 Bani: ${money}`;
-
